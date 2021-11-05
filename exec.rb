@@ -1,19 +1,23 @@
 require "selenium-webdriver"
 
-URL = "https://www.tokyodisneyresort.jp/ticket/index.html"
+URL = "https://reserve.tokyodisneyresort.jp/ticket/search/"
+# "https://www.tokyodisneyresort.jp/ticket/index.html"
+#"https://reserve.tokyodisneyresort.jp/ticket/search/?outside=1&route=2&parkTicketGroupCd=020&useDateFrom=20211206"
 
 def main
   #driver = get_driver
   driver = Selenium::WebDriver.for :chrome
-  driver.navigate.to(URL)
-  driver.manage.timeouts.implicit_wait = 60
-  message = driver.find_elements(class: "textalign")
-  #timer = 0
+  driver.manage.timeouts.implicit_wait = 600000
+  #wait = Selenium::WebDriver::Wait.new(timeout: 60)
   while true
-    if message.size > 0 && message[0].text.find("アクセスが集中")
-      timer.sleep(0.5)
-      driver.navigate.refresh
+    driver.navigate.to(URL)
+    message = driver.find_elements(class: "textalign")
+    busy_message = "ただいまアクセスが集中しており、サイトにつながりにくい状態となっています。\nご不便をおかけしてしまい、申し訳ございません。\nお手数をおかけしますが、しばらく時間をおいてから再度アクセスしていただきますようお願いいたします。\n※午前3時～午前5時は、システムメンテナンスのためご利用いただけません。"
+    if message.size > 0 && message[0].text == busy_message
+      #driver.navigate.refresh
+      sleep 1
     else
+      sleep 100000
       break
       #driver.close
     end
@@ -32,6 +36,8 @@ end
 
 # def is_busy(driver)
 #   message = driver.find_elements(class: "textalign")
+#   busy_message = "ただいまアクセスが集中しており、サイトにつながりにくい状態となっています。\nご不便をおかけしてしまい、申し訳ございません。\nお手数をおかけしますが、しばらく時間をおいてから再度アクセスしていただきますようお願いいたします。\n※午前3時～午前5時は、システムメンテナンスのためご利用いただけません。"
+#   tmp = []
 #   if message.size > 0 && message[0].text.find("アクセスが集中")
 #     True
 #   else
