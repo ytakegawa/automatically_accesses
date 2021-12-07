@@ -6,4 +6,10 @@
 
 - brew install chromedriver
 - bundel install
-- bundle exec ruby exec.rb
+- ruby exec.rb
+
+## If open page
+
+- ps -a | grep chromedriver
+- kill -9 'chromedriver process number'
+

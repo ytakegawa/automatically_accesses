@@ -1,4 +1,5 @@
 require "selenium-webdriver"
+#require "Win32API"
 
 URL = "https://reserve.tokyodisneyresort.jp/ticket/search/"
 # "https://www.tokyodisneyresort.jp/ticket/index.html"
@@ -15,8 +16,12 @@ def main
     busy_message = "ただいまアクセスが集中しており、サイトにつながりにくい状態となっています。\nご不便をおかけしてしまい、申し訳ございません。\nお手数をおかけしますが、しばらく時間をおいてから再度アクセスしていただきますようお願いいたします。\n※午前3時～午前5時は、システムメンテナンスのためご利用いただけません。"
     if message.size > 0 && message[0].text == busy_message
       #driver.navigate.refresh
-      sleep 1
+      sleep 0.5
     else
+      #beep = Win32API.new("kernel32", "Beep", %w(i i), "i")
+      #beep.call(262, 500)
+      #Signal.trap("INT") { |signo| Signal.signame(signo) }
+      #Process.kill(9, Process.ppid)
       sleep 100000
       break
       #driver.close
