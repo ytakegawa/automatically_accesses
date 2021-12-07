@@ -4,12 +4,24 @@
 
 ## Usage for Mac
 
-- brew install chromedriver
-- bundel install
-- ruby exec.rb
+```
+brew install chromedriver
+```
 
-## If open page
+```
+bundel install
+```
 
-- ps -a | grep chromedriver
-- kill -9 'chromedriver process number'
+```
+ruby exec.rb
+```
 
+## If the page opens
+use tarminal
+```
+ps -a | grep chromedriver
+```
+
+```
+kill -9 'chromedriver process number'
+```
